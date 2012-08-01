@@ -3,12 +3,19 @@ module Common
     def initialize
       @values = []
     end
+
+    def empty?
+      @values.size.zero?
+    end
+
     def size
       @values.size
     end
-    def push(n)
-      @values.push(n)
+
+    def push(*args)
+      args.each { |n| @values.push(n) }
     end
+
     def pop
       @values.shift
     end

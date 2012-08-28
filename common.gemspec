@@ -9,9 +9,12 @@ Gem::Specification.new do |s|
     It is used for learning, Project Euler,
     and anything fun on the side.
   }
+  s.add_dependency('mechanize')
 	s.summary     = 'multi-purpose library'
 	s.authors			= ["Chester Cun"]
 	s.email				= 'chester.cubed@gmail.com'
 	s.files				= Dir['lib/*','lib/*/*']
 	s.homepage		= 'http://localhost:3000'
 end
+
+

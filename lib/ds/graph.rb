@@ -43,6 +43,7 @@ module Common
 
     # depth first searching
     def run_dfs(initial=nil)
+      reset
       initial = !initial.nil? ? initial : @vertices.keys.first
       u = getVertex( initial )
       dfs( u )
@@ -54,15 +55,28 @@ module Common
       show_path(to)
     end
 
+    # show the chain of the path
+    def show_history(name)
+      u = getVertex(name)
+      vertexArray = path_array(u,[])
+      puts vertexArray.map{ |v| v.name }.join('->')
+    end
+    
     private
 
-    def getVertex(name)
-      name_sym = name.to_sym
-      if @vertices[name_sym].nil?
-        v = Common::Vertex.new(name)
-        @vertices[name_sym] = v
+    def reset
+      @vertices.each do |key,val|
+        val.reset
       end
-      @vertices[name_sym]
+    end
+
+    def getVertex(name)
+      name_s = name.to_s
+      if @vertices[name_s].nil?
+        v = Common::Vertex.new(name)
+        @vertices[name_s] = v
+      end
+      @vertices[name_s]
     end
 
     # run Dijkstra's Algorithm
@@ -71,15 +85,43 @@ module Common
     end
 
     # show path of "previous"
-    def show_path(name)
-
+    def path_array(vertex,array)
+      path_array( vertex.prev, array ) unless vertex.prev.nil?
+      array.push(vertex)
     end
 
     # run a depth first search
-    # starting from
-    def dfs(start)
-
+    # starting with an initial
+    # Common::Vertex object
+    def dfs(startVertex)
+      count = 0
+      explore( startVertex, count )
     end
 
+    def explore(vertex,count)
+      # Pre Processing
+      p "vertex: #{vertex.name} -> pre: #{count}"
+      count += 1
+      
+      # set "visit" flag, stop recursion
+      vertex.visited = true
+
+      # iterate adjacent vertices
+      vertex.neighbors.each do |adj_v|
+        if not adj_v.visited?
+          count = explore(adj_v,count)
+        end
+        # record previous vertex
+        adj_v.prev = vertex
+      end
+
+      # Post Processing
+      p "vertex: #{vertex.name} -> post: #{count}"
+      count += 1
+
+      # i wish i could pass by reference in ruby
+      # gotta look into that later
+      count
+    end
   end
 end

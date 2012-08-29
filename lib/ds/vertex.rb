@@ -23,11 +23,15 @@ module Common
     end
 
     def neighbors
-      @adjacent_a.dup
+      @adjacent_a
     end
 
     def visited?
-      self.visited.eql? true
+      self.visited
+    end
+
+    def not_visited?
+      !self.visited?
     end
   end
 end

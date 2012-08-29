@@ -2,5 +2,5 @@
 
 require 'ds/queue'
 require 'ds/vertex'
-
+require 'ds/graph'
 

@@ -1,5 +1,6 @@
 module Common
   class Node
+    attr_accessor :value
     def initialize(val=nil)
       @value = val
     end
@@ -7,9 +8,9 @@ module Common
 
   module BinaryNode
     def initialize(val=nil)
-      class_eval %Q{
+      self.class.class_eval do
         attr_accessor :left, :right
-      }
+      end
       @left, @right = nil, nil
       super(val)
     end

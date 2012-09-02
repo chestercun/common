@@ -52,21 +52,21 @@ module Common
     # shortest path
     def shortest_path(from,to)
       dijkstra(from)
-      show_path(to)
+      show_history(to)
     end
 
     # show the chain of the path
     def show_history(name)
       u = getVertex(name)
-      vertexArray = path_array(u,[])
-      puts vertexArray.map{ |v| v.name }.join('->')
+      vertex_array = path_array(u,[])
+      puts vertex_array.map{ |v| v.name }.join('->')
     end
     
     private
 
     def reset
-      @vertices.each do |key,val|
-        val.reset
+      @vertices.each do |key,vertex|
+        vertex.reset
       end
     end
 
@@ -93,11 +93,12 @@ module Common
     # run a depth first search
     # starting with an initial
     # Common::Vertex object
-    def dfs(startVertex)
+    def dfs(start_vertex)
       count = 0
-      explore( startVertex, count )
+      explore( start_vertex, count )
     end
 
+    # recursive "beast"
     def explore(vertex,count)
       # Pre Processing
       p "vertex: #{vertex.name} -> pre: #{count}"

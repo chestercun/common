@@ -15,6 +15,10 @@ module Common
       super(val)
     end
 
+    def leaf_node?
+      childless?
+    end
+
     def childless?
       @left.nil? and @right.nil?
     end

@@ -3,6 +3,8 @@ require 'ext/extensions'
 
 # utilities
 require 'utility/file_utility'
+require 'utility/dynamic_programming'
+require 'utility/fibonacci'
 
 # homegrown data structures
 require 'ds/data_structures'
@@ -16,5 +18,9 @@ module Common
   extend FileUtility
   # makes it so that you can do
   # Common.function_from_file_utility('a.txt')
+  
+  
+  extend DynamicProgramming
+  extend Fibonacci
 end
 

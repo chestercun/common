@@ -12,4 +12,8 @@ class Array
     end
     false
   end
+
+  def sum
+    self.inject(:+)
+  end
 end

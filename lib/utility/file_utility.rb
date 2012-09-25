@@ -19,6 +19,17 @@ module FileUtility
     tmp
   end
 
+  def file_to_a(fn)
+    file = open(fn)
+    tmp = []
+    file.each do |line|
+      line.sub! /\n$/, ''
+      values = line.split(/\s+/)
+      tmp.push(values)
+    end
+    tmp
+  end
+
   private
 
   def open(fn)

@@ -6,4 +6,5 @@ require 'ds/graph'
 require 'ds/node'
 require 'ds/heap'
 require 'ds/priority_queue'
+require 'ds/tree'
 

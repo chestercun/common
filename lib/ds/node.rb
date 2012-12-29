@@ -1,8 +1,14 @@
 module Common
   class Node
     attr_accessor :value
+    include Comparable
+
     def initialize(val=nil)
       @value = val
+    end
+
+    def <=>(other)
+      self.value <=> other.value
     end
   end
 

@@ -1,5 +1,27 @@
 require 'spec_helper'
 
+# integer class
+describe Integer do
+  before do
+    @int = 32
+  end
+  subject { @int }
+  it { should respond_to(:mod_array?) }
+
+  describe "mod_array? feature" do
+    before do
+      @array = [3,5,8]
+      @array2 = [3,9,11]
+    end
+    it "32.mod_array? [3,5,8] is true" do
+      @int.mod_array?(@array).should == true
+    end
+    it "32.mod_array? [3,9,11] is true" do
+      @int.mod_array?(@array2).should == false
+    end
+  end
+end
+
 # string class
 describe String do
   before do
@@ -35,6 +57,9 @@ describe Array do
   it "should not be mod 4" do
     (@dummy % 4).should == false
   end
+  it "should sum to 5+2+9+19+11" do
+    (@dummy.sum).should == (5+2+9+19+11)
+  end
 end
 
 # queue
@@ -65,6 +90,30 @@ describe Common::Queue do
   end
 end
 
+# node
+describe Common::Node do
+  before do
+    @node = Common::Node.new(14)
+    @node2 = Common::Node.new(14)
+    @heap_node = Common::HeapNode.new(9)
+    @tree_node = Common::TreeNode.new(6)
+  end
+
+  subject { @node }
+
+  it { should respond_to(:value) }
+  it "should  be initialized" do
+    @node.value.should == 14
+  end
+  it "should be a leaf node" do
+    is_leaf = @heap_node.leaf_node?
+    is_leaf.should == true
+  end
+  it "should have a comparison operator" do
+    (@node<=>@node2).should == 0
+  end
+end
+
 # vertex
 describe Common::Vertex do
   before do
@@ -82,6 +131,7 @@ describe Common::Vertex do
     it "should set visited to false after reset" do
       @v1.reset
       @v1.should_not be_visited
+      @v1.should be_not_visited
     end
   end
 
@@ -101,7 +151,10 @@ describe Common::DSL do
   subject { self }
   it { should respond_to(:time) }
 
-  xit "should have a time method" do
+  it "should have a time method" do
+    time do
+      puts "simple print statement"
+    end
   end
 end
 

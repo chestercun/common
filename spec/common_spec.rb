@@ -78,8 +78,8 @@ describe Common::Queue do
       @q.push(4,5,2)
     end
 
-    its(:size) { should_not be_zero }
-    its(:size) { should == 3 }
+    it { @q.size.should_not be_zero }
+    it { @q.size.should eq(3) }
     it { should_not be_empty }
 
     it "should lose values after pop" do
